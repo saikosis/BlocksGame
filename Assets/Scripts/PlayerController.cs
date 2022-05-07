@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,13 +19,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Input.GetAxis("Jump") > 0 -> float value is retured
+        // If 'Space' key is pressed then counter will be increased
         if (Input.GetKeyDown("space")) // boolean returned
         {
             count_var += 1;
             Debug.Log($"count_var : {count_var}");
         }
-
+        // When count_var is even number then we can move the bloack
         if (count_var % 2 == 0)
         {
 
