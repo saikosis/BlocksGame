@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private float def_speed; //default speed
     private float accelration = 1f;
     private int count_var;
+    public GameObject gameWonPanel;
+    private bool isGameWon;
 
     // Start is called before the first frame update
     void Start()
@@ -19,13 +21,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If 'Space' key is pressed then counter will be increased
+        // stop moving the player once game is won
+        if (isGameWon == true)
+        {
+            return;
+        }
+
+        // Input.GetAxis("Jump") > 0 -> float value is retured
         if (Input.GetKeyDown("space")) // boolean returned
         {
             count_var += 1;
             Debug.Log($"count_var : {count_var}");
         }
-        // When count_var is even number then we can move the bloack
+
         if (count_var % 2 == 0)
         {
 
@@ -66,6 +74,10 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Door")
+        {
             Debug.Log("Level Complete!!!");
+            gameWonPanel.SetActive(true);
+            isGameWon = true;
+        }
     }
 }
