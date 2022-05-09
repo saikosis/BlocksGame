@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     private float accelration = 1f;
     private int count_var;
     public GameObject gameWonPanel;
-    private bool isGameWon;
+    public GameObject gameLostPanel;
+    private bool isGameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // stop moving the player once game is won
-        if (isGameWon == true)
+        if (isGameOver == true)
         {
             return;
         }
@@ -77,7 +78,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Level Complete!!!");
             gameWonPanel.SetActive(true);
-            isGameWon = true;
+            isGameOver = true;
+        }
+        else if (collision.tag == "Enemy")
+        {
+            Debug.Log("Level Lost :(");
+            gameLostPanel.SetActive(true);
+            isGameOver = true;
         }
     }
 }
